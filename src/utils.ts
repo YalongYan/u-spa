@@ -1,12 +1,12 @@
 // 获取当前时间 年-月-日 时:分:秒
 export const getCurrentDate = () => {
-  let time = new Date();
+  let time: Date = new Date();
   let year = time.getFullYear();
-  let month = time.getMonth() + 1;
-  let day = time.getDate();
-  let h = time.getHours();
-  let m = time.getMinutes();
-  let s = time.getSeconds();
+  let month: number | string = time.getMonth() + 1;
+  let day: number | string = time.getDate();
+  let h: number | string = time.getHours();
+  let m: number | string = time.getMinutes();
+  let s: number | string = time.getSeconds();
   month = month < 10 ? '0' + month : month;
   day = day < 10 ? '0' + day : day;
   h = h < 10 ? '0' + h : h;

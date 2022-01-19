@@ -1,7 +1,7 @@
 // let requestUlr = 'http://localhost:1153/scanStatic/addScanInfo';
 
 // const postRequest = function (url, data) {
-export const postRequest = function (url, data) {
+export const postRequest = function (url: string, data: any) {
   return new Promise((resolve, reject) => {
     var xhr = new XMLHttpRequest()
     xhr.open("POST", url, true)
@@ -10,10 +10,10 @@ export const postRequest = function (url, data) {
       if (this.readyState === 4) {
         if (this.status === 200) {
           // resolve(JSON.parse(this.responseText), this)
-          resolve(this.responseText, this)
+          resolve(this.responseText)
         } else {
           var resJson = { code: this.status, response: this.response }
-          reject(resJson, this)
+          reject(resJson)
         }
       }
     }

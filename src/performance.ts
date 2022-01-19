@@ -3,7 +3,7 @@ import { postRequest } from './uploadData';
 import { getCurrentDate } from './utils';
 
 let fn = async () => {
-  let timing = performance.getEntriesByType('navigation')[0]
+  let timing: any = performance.getEntriesByType('navigation')[0]
   let TTI = timing.domInteractive - timing.fetchStart; // 首次可交互时间
   let L = timing.loadEventStart - timing.fetchStart; // 页面完全加载时间
   let FP = timing.responseEnd - timing.fetchStart; // 白屏时间

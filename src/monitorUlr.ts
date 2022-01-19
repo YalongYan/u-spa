@@ -2,14 +2,15 @@ import { requestUlr } from './config';
 import { postRequest } from './uploadData';
 import { getCurrentDate } from './utils';
 
-// history 扩展函数
-var _extendEvent = function(type) {
+// history 扩展函数, 只扩展 pushState replaceState 这俩就行
+var _extendEvent = function(type: 'pushState' | 'replaceState') {
   // 保留原来的事件
+  let history: History = window.history
   var orig = history[type];
   return function() {
       // 执行原来的事件，保证不影响原有事件
       let result= orig.apply(this, arguments);
-      let e = new Event(type);
+      let e: any = new Event(type);
       e.arguments = arguments;
       // 主动触发'pushState','replaceState'事件
       window.dispatchEvent(e);
@@ -21,7 +22,7 @@ var _extendEvent = function(type) {
 history.pushState = _extendEvent('pushState');
 history.replaceState = _extendEvent('replaceState');
 
-let historyFn = async (e) => {
+let historyFn = async (e: any) => {
   let href = e.currentTarget.location.href
   const res = await postRequest(requestUlr, {
     type: 'url',
@@ -32,7 +33,7 @@ let historyFn = async (e) => {
   console.log(res)
 }
 
-let hashFn = async (e) => {
+let hashFn = async (e: HashChangeEvent) => {
   let href = e.newURL
   const res = await postRequest(requestUlr, {
     type: 'url',
