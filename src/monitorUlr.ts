@@ -24,13 +24,18 @@ history.replaceState = _extendEvent('replaceState');
 
 let historyFn = async (e: any) => {
   let href = e.currentTarget.location.href
-  const res = await postRequest(requestUlr, {
+  console.log({
     type: 'url',
     value: href,
     userAgent: navigator.userAgent,
     visitTime: getCurrentDate(),
   })
-  console.log(res)
+  // const res = await postRequest(requestUlr, {
+  //   type: 'url',
+  //   value: href,
+  //   userAgent: navigator.userAgent,
+  //   visitTime: getCurrentDate(),
+  // })
 }
 
 let hashFn = async (e: HashChangeEvent) => {
@@ -46,15 +51,19 @@ let hashFn = async (e: HashChangeEvent) => {
 }
 
 let url = location.href
- 
-/**
- * location.hash, history.go, history.back, history.forward 会触发 popstate
- * 不加下面的判断，在hash模式下 会触发两次
- */
-if (url.indexOf('#') > -1) {
-  window.addEventListener('hashchange', hashFn);
-} else {
-  window.addEventListener('replaceState', historyFn);
-  window.addEventListener('pushState', historyFn);
-  window.addEventListener('popstate', historyFn);
+
+const monitorUlrInitFn = () => {
+  /**
+   * location.hash, history.go, history.back, history.forward 会触发 popstate
+   * 不加下面的判断，在hash模式下 会触发两次
+   */
+  if (url.indexOf('#') > -1) {
+    window.addEventListener('hashchange', hashFn);
+  } else {
+    window.addEventListener('replaceState', historyFn);
+    window.addEventListener('pushState', historyFn);
+    window.addEventListener('popstate', historyFn);
+  }
 }
+
+export default monitorUlrInitFn;

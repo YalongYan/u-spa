@@ -14,3 +14,16 @@ export const getCurrentDate = () => {
   s = s < 10 ? '0' + s : s;
   return `${year}-${month}-${day} ${h}:${m}:${s}`;
 };
+
+// 通过 key 获取 cookie 的值
+export const getCookieByKey = (key: string) => {
+  let cookieArr = document.cookie.split(';')
+  let result = ''
+  cookieArr.forEach(item => {
+    let arr = item.split('=')
+    if (arr[0].trim() === key) {
+      result = arr[1].trim()
+    }
+  })
+  return result
+}

@@ -10,13 +10,23 @@ let fn = async () => {
   let obj = {
     TTI, L, FP
   }
-  const res = await postRequest(requestUlr, {
-    type: 'url',
+  console.log({
+    type: 'performance',
     value: JSON.stringify(obj),
     userAgent: navigator.userAgent,
     visitTime: getCurrentDate(),
+    visitUrl:location.href,  // 访问地址
   })
-  console.log(res)
+  // const res = await postRequest(requestUlr, {
+  //   type: 'url',
+  //   value: JSON.stringify(obj),
+  //   userAgent: navigator.userAgent,
+  //   visitTime: getCurrentDate(),
+  // })
 }
 
-window.addEventListener('load', fn)
+function performanceInitFn() {
+  window.addEventListener('load', fn)
+}
+
+export default performanceInitFn;
