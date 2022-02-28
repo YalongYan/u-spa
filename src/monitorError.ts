@@ -1,6 +1,6 @@
 import { requestUlr } from './config';
 import { postRequest } from './uploadData'
-import { getCurrentDate } from './utils';
+import { getCurrentDate, getUserName } from './utils';
 
 const monitorErrorInitFn = () => {
   /**
@@ -9,10 +9,15 @@ const monitorErrorInitFn = () => {
    * 上报的信息就存储为一个字符串
    */
   const oldErrorLog = console.error;
+
+  let userName = getUserName()
+  console.error = null // 这一步是避免重复添加
   console.error = function(str) {
     oldErrorLog(str)
     console.log({
       type: 'error',
+      userName,
+      url: location.href,
       value: str,
       userAgent: navigator.userAgent,
       visitTime: getCurrentDate(),

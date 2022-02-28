@@ -1,6 +1,6 @@
 import { requestUlr } from './config';
 import { postRequest } from './uploadData';
-import { getCurrentDate } from './utils';
+import { getCurrentDate, getUserName } from './utils';
 
 let fn = async () => {
   let timing: any = performance.getEntriesByType('navigation')[0]
@@ -10,12 +10,22 @@ let fn = async () => {
   let obj = {
     TTI, L, FP
   }
+  let userName = getUserName()
+
   console.log({
     type: 'performance',
+    userName,
     value: JSON.stringify(obj),
     userAgent: navigator.userAgent,
     visitTime: getCurrentDate(),
     visitUrl:location.href,  // 访问地址
+  })
+  console.log({
+    type: 'url',
+    userName,
+    value: location.href,
+    userAgent: navigator.userAgent,
+    visitTime: getCurrentDate(),
   })
   // const res = await postRequest(requestUlr, {
   //   type: 'url',

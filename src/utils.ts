@@ -27,3 +27,42 @@ export const getCookieByKey = (key: string) => {
   })
   return result
 }
+
+/**
+ * 
+ * @param str
+ * localStorage 可能存储的是对象，层层嵌套，这种情况，str 就传 "a.b.c"， 对象的示例： {a: {b: {c: 'hi'}}}
+ * @returns localStorage中寻找到的值
+ */
+export const getLocalStorageByKey = (str: string) => {
+  let result = ''
+  if (str.indexOf('.') > 0) {
+    let keyArr = str.split('.')
+    let initObj = JSON.parse(localStorage.getItem(keyArr[0]))
+    for (let i = 1; i < keyArr.length; i++) {
+      if (i === keyArr.length - 1) {
+        result = initObj[keyArr[i]]
+      } else {
+        initObj = initObj[keyArr[i]]
+      }
+    }
+  } else {
+    result = localStorage.getItem(str)
+  }
+  return result
+}
+
+export const getUserName = () => {
+  let userNameLocation = getLocalStorageByKey('uSpaInfoObj.userNameLocation')
+  let userNameKey = getLocalStorageByKey('uSpaInfoObj.userNameKey')
+  let temporaryUserName = getLocalStorageByKey('uSpaInfoObj.temporaryUserName')
+  let result = ''
+  if (userNameLocation === 'localStorage') {
+    result = getLocalStorageByKey(userNameKey)
+  } else if (userNameLocation === 'cookie') {
+    result = getCookieByKey(userNameKey)
+  } else {
+    result = temporaryUserName
+  }
+  return result
+}

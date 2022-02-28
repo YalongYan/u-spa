@@ -1,6 +1,6 @@
 import { requestUlr } from './config';
 import { postRequest } from './uploadData';
-import { getCurrentDate } from './utils';
+import { getCurrentDate, getUserName } from './utils';
 
 // history 扩展函数, 只扩展 pushState replaceState 这俩就行
 var _extendEvent = function(type: 'pushState' | 'replaceState') {
@@ -21,11 +21,14 @@ var _extendEvent = function(type: 'pushState' | 'replaceState') {
 // 扩展原有的 pushState、replaceState 方法
 history.pushState = _extendEvent('pushState');
 history.replaceState = _extendEvent('replaceState');
+let userName = getUserName()
 
 let historyFn = async (e: any) => {
+  console.log('aaaa')
   let href = e.currentTarget.location.href
   console.log({
     type: 'url',
+    userName,
     value: href,
     userAgent: navigator.userAgent,
     visitTime: getCurrentDate(),

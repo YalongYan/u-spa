@@ -1,6 +1,6 @@
 {
   "name": "u-spa",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "spa监控工具",
   "private": false,
   "main": "dist/index.js",
