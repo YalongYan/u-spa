@@ -23,8 +23,11 @@ import performanceInitFn from './performance'
   localStorage.setItem('uSpaInfoObj', JSON.stringify(res))
 
   performanceInitFn()
-  monitorUlrInitFn()
-  monitorErrorInitFn()
+  
+  setTimeout(() => {
+    monitorUlrInitFn()
+    monitorErrorInitFn()
+  }, 1000);
 }
 
 function initSpaInfo (id: number) {

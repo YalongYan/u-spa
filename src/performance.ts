@@ -12,21 +12,23 @@ let fn = async () => {
   }
   let userName = getUserName()
 
-  console.log({
-    type: 'performance',
-    userName,
-    value: JSON.stringify(obj),
-    userAgent: navigator.userAgent,
-    visitTime: getCurrentDate(),
-    visitUrl:location.href,  // 访问地址
-  })
-  console.log({
-    type: 'url',
-    userName,
-    value: location.href,
-    userAgent: navigator.userAgent,
-    visitTime: getCurrentDate(),
-  })
+  setTimeout(() => {
+    console.log({
+      type: 'performance',
+      userName,
+      value: JSON.stringify(obj),
+      userAgent: navigator.userAgent,
+      visitTime: getCurrentDate(),
+      visitUrl:location.href,  // 访问地址
+    })
+    console.log({
+      type: 'url',
+      userName,
+      value: location.href,
+      userAgent: navigator.userAgent,
+      visitTime: getCurrentDate(),
+    })
+  }, 1000);
   // const res = await postRequest(requestUlr, {
   //   type: 'url',
   //   value: JSON.stringify(obj),

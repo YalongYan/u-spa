@@ -1,11 +1,12 @@
 {
   "name": "u-spa",
-  "version": "0.0.4",
-  "description": "spa监控工具",
+  "version": "0.0.8",
+  "description": "spa监控工具,统计首屏加载数据，统计PU、UV，统计异常信息",
   "private": false,
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
+  "type": "module",
   "scripts": {
     "build": "npm run clean && tsc -p tsconfig.json",
     "clean": "rimraf ./dist"
@@ -21,7 +22,8 @@
     "monitor",
     "监控",
     "pu",
-    "uu"
+    "uu",
+    "稳定性"
   ],
   "files": [
     "dist"

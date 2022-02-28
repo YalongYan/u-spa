@@ -38,7 +38,11 @@ export const getLocalStorageByKey = (str: string) => {
   let result = ''
   if (str.indexOf('.') > 0) {
     let keyArr = str.split('.')
-    let initObj = JSON.parse(localStorage.getItem(keyArr[0]))
+    // 避免空值
+    let initObj = localStorage.getItem(keyArr[0]) ? JSON.parse(localStorage.getItem(keyArr[0])) : ''
+    if (!initObj) {
+      return ''
+    }
     for (let i = 1; i < keyArr.length; i++) {
       if (i === keyArr.length - 1) {
         result = initObj[keyArr[i]]
