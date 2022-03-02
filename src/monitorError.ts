@@ -22,12 +22,6 @@ const monitorErrorInitFn = () => {
       userAgent: navigator.userAgent,
       visitTime: getCurrentDate(),
     })
-    // postRequest(requestUlr, {
-    //   type: 'error',
-    //   value: str,
-    //   userAgent: navigator.userAgent,
-    //   visitTime: getCurrentDate(),
-    // })
   }
 }
 
