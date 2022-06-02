@@ -35,3 +35,4 @@ function initSpaInfo (id: number) {
 }
 
 export default initSpaInfo;
+
