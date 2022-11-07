@@ -23,7 +23,9 @@ function fn () {
     userAgent: navigator.userAgent,
     visitUrl:location.href,  // 访问地址
   }
-  postRequest(initRequestUrlValue, reqObj)
+  if (initHostUrlValue === location.host) {
+    postRequest(initRequestUrlValue, reqObj)
+  }
 }
 
 function performanceInitFn(obj: initType) {

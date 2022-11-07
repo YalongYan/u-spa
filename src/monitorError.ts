@@ -47,7 +47,9 @@ const monitorErrorInitFn = (obj: initType) => {
         // visitTime: getCurrentDate(),
       }
     }
-    postRequest(initRequestUrlValue, reqObj)
+    if (initHostUrlValue === location.host) {
+      postRequest(initRequestUrlValue, reqObj)
+    }
   }, true)
 }
 

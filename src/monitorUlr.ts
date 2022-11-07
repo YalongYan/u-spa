@@ -44,7 +44,9 @@ let historyFn = async (e: any) => {
     value: href,
     userAgent: navigator.userAgent,
   } 
-  postRequest(initRequestUrlValue, reqObj)
+  if (initHostUrlValue === location.host) {
+    postRequest(initRequestUrlValue, reqObj)
+  }
 }
 
 let hashFn = async (e: HashChangeEvent) => {
