@@ -1,7 +1,7 @@
 {
   "name": "u-spa",
-  "version": "0.5.0",
-  "description": "spa监控工具,统计首屏加载数据，统计PU、UV，统计异常信息",
+  "version": "0.6.0",
+  "description": "SPA应用监控工具,监听url变化、首屏加载指标、js-error、image-error 并上报",
   "private": false,
   "main": "dist/index.js",
   "module": "dist/index.js",
