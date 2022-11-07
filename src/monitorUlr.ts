@@ -26,11 +26,11 @@ var _extendEvent = function(type: 'pushState' | 'replaceState') {
 // 扩展原有的 pushState、replaceState 方法
 history.pushState = _extendEvent('pushState');
 history.replaceState = _extendEvent('replaceState');
-let userName = getUserName(initCookieNameValue)
 
 let tempUrl = '' // historyFn hashFn 有时候会重复，所以用这个变量去重
 
 let historyFn = async (e: any) => {
+  let userName = getUserName(initCookieNameValue)
   console.log('history====')
   let href = e.currentTarget.location.href
   if (tempUrl === href) {
@@ -48,6 +48,7 @@ let historyFn = async (e: any) => {
 }
 
 let hashFn = async (e: HashChangeEvent) => {
+  let userName = getUserName(initCookieNameValue)
   console.log('hash===')
   let href = e.newURL
   if (tempUrl === href) {
