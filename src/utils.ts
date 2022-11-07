@@ -56,17 +56,23 @@ export const getLocalStorageByKey = (str: string) => {
   return result
 }
 
-export const getUserName = () => {
-  let userNameLocation = getLocalStorageByKey('uSpaInfoObj.userNameLocation')
-  let userNameKey = getLocalStorageByKey('uSpaInfoObj.userNameKey')
-  let temporaryUserName = getLocalStorageByKey('uSpaInfoObj.temporaryUserName')
-  let result = ''
-  if (userNameLocation === 'localStorage') {
-    result = getLocalStorageByKey(userNameKey)
-  } else if (userNameLocation === 'cookie') {
-    result = getCookieByKey(userNameKey)
-  } else {
-    result = temporaryUserName
+/**
+ * 
+ * @param cookieKey cookie 的 key 值
+ * @returns 
+ */
+export const getUserName = (cookieKey: string) => {
+  if (!cookieKey) {
+    return ''
   }
+  let result = ''
+  let cookieStr = document.cookie || ''
+  cookieStr && cookieStr.split(';').forEach(item => {
+    let subItem = item.trim()
+    let subArr = subItem.split('=')
+    if (subArr[0] === cookieKey) {
+      result = subArr[1]
+    }
+  })
   return result
 }

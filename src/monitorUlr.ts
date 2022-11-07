@@ -1,6 +1,11 @@
 import { requestUlr } from './config';
 import { postRequest } from './uploadData';
 import { getCurrentDate, getUserName } from './utils';
+import { initType } from './common'
+
+let initRequestUrlValue: string = ''
+let initHostUrlValue: string = ''
+let initCookieNameValue: string | undefined = ''
 
 // history 扩展函数, 只扩展 pushState replaceState 这俩就行
 var _extendEvent = function(type: 'pushState' | 'replaceState') {
@@ -21,7 +26,7 @@ var _extendEvent = function(type: 'pushState' | 'replaceState') {
 // 扩展原有的 pushState、replaceState 方法
 history.pushState = _extendEvent('pushState');
 history.replaceState = _extendEvent('replaceState');
-let userName = getUserName()
+let userName = getUserName(initCookieNameValue)
 
 let tempUrl = '' // historyFn hashFn 有时候会重复，所以用这个变量去重
 
@@ -33,13 +38,13 @@ let historyFn = async (e: any) => {
   } else {
     tempUrl = href
   }
-  console.log({
+  const reqObj = {
     type: 'url',
     userName,
     value: href,
     userAgent: navigator.userAgent,
-    visitTime: getCurrentDate(),
-  })
+  } 
+  postRequest(initRequestUrlValue, reqObj)
 }
 
 let hashFn = async (e: HashChangeEvent) => {
@@ -50,16 +55,22 @@ let hashFn = async (e: HashChangeEvent) => {
   } else {
     tempUrl = href
   }
-  console.log({
+  const reqObj = {
     type: 'url',
     userName,
     value: href,
     userAgent: navigator.userAgent,
-    visitTime: getCurrentDate(),
-  })
+    // visitTime: getCurrentDate(),
+  }
+  postRequest(initRequestUrlValue, reqObj)
 }
 
-const monitorUlrInitFn = () => {
+function monitorUlrInitFn (obj: initType) {
+  const { requestUrl, hostUrl, cookieNameKey } = obj
+  initRequestUrlValue = requestUrl
+  initHostUrlValue = hostUrl
+  initCookieNameValue = cookieNameKey
+
   /**
    * location.hash, history.go, history.back, history.forward 会触发 popstate
    * 所以 hash改变的时候，会同时触发 hashChange popState
